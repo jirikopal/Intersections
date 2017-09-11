@@ -1,5 +1,6 @@
 function [ test, uvt ] = rangetest( uvt,ui,vi,u2i,v2i,tol )
-
+% test if paramaters does not leave current patch, otherwise it is returned
+% back
 
 test = 0;
 

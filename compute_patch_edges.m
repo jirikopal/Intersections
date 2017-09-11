@@ -1,6 +1,5 @@
 function [ X_coor,Y_coor ] = compute_patch_edges( u_knots, v_knots, P0,P1,P2,P3)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%compute matrix of patch edges
 u_n_bound = length(u_knots)-4;
 v_n_bound = length(v_knots)-4;
 

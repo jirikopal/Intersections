@@ -1,10 +1,11 @@
 function [ f, k ] = splinebasevec( T,t,order,varargin)
+% computes function values of basis function (at most 3 nonzero entries) for given knot vector
 
 %  T - knot vector
 %  k - index of basis function, k = 1,...,length(T)-3
 %  t - parameter t \in [0,1]
 %  f - vector of basis functions values
-%  k - kth interval
+%  k - kth interval (non empty)
 
 n = length(T);
 

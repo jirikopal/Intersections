@@ -1,7 +1,8 @@
 function [ B,Interv ] = build_LS_matrix( u_knots,v_knots, Xp )
+% build linear system for unknown control points
 u_n_basf = length(u_knots)-3;
 v_n_basf = length(v_knots)-3;
-[np k] = size(Xp); % k unused
+[np ~] = size(Xp); 
 B =spalloc(np,u_n_basf*v_n_basf,9*np);
 Interv = zeros(np,2);
 for j = 1:np

@@ -1,4 +1,7 @@
 function [ bool ] = boundary_point(uv,iujv,u_knots,v_knots)
+% test if the intersection points lie on the boundary of the patches, whole area 
+
+
 bool = [-1,-1];
 
 uint = [u_knots(iujv(1)+2), u_knots(iujv(1)+3)];

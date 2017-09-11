@@ -1,6 +1,5 @@
 function [ X_coor,Y_coor ] = compute_control_points( u_knots, v_knots, P0,P1,P2,P3)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% compute control points in irregular quadrilateral
 u_n_basf = length(u_knots)-3;
 v_n_basf = length(v_knots)-3;
 

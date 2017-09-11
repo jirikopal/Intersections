@@ -1,5 +1,5 @@
 function [ A ] = build_reg_matrix( u_knots,v_knots, P0,P1,P2,P3,nnzA )
-
+% build regularization matrix to regularize system of normal equations
 u_n_basf = length(u_knots)-3;
 v_n_basf = length(v_knots)-3;
 u_n_inter = length(u_knots) - 5

@@ -1,4 +1,7 @@
-function [ Xp X] = transform( X,P0,P1,P2,P3 )
+function [ Xp] = transform( X,P0,P1,P2,P3 )
+% transform given points (rows of X) which leads in irregular quadrilateral
+% (P0, P1, P2, P3) to a rectangle all the other points are dropped
+
 
 [np k] = size(X);
 
@@ -25,7 +28,8 @@ for i =2:4
     Ni(:,i) = Ni(:,i)/norm(Ni(:,i));
 end
 
-%%% Compute local coordinates and drop all 
+%%% Compute local coordinates and drop all which does not lies in chosen
+%%% irregular quadrilateral
 
 h = 0;
 for j=1:np
@@ -34,13 +38,7 @@ for j=1:np
     
     u =  (P - Pi(:,1))' * Ni(:,1) / ( (P - Pi(:,1))' * Ni(:,1) + (P - Pi(:,3))' * Ni(:,3)    ) ;
     v =  (P - Pi(:,1))' * Ni(:,2) / ( (P - Pi(:,1))' * Ni(:,2) + (P - Pi(:,4))' * Ni(:,4)    ) ;
-%     P - Pi(:,1)
-%     P - Pi(:,4)
-%     Ni(:,2)
-%     Ni(:,4)
-%     (P - Pi(:,1))' * Ni(:,2)
-%     (P - Pi(:,4))' * Ni(:,4) 
-%     pause
+
     
     if (u >= 0) && (u <= 1) && (v >= 0) && (v <= 1)
         h = h+1;

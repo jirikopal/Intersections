@@ -1,4 +1,5 @@
 function [ k ] = find_int( T,t )
+% search corresponding interval in knot vector
 
 n = length(T);
 mn = 3;

@@ -1,17 +1,19 @@
+% main script to compute control points of the given surfaces 
 
 clc
 clear all
 close all
 
 
-u_n_basf = 15;
-v_n_basf = 15;
+u_n_basf = 14; %%%%%%% XXXXXXXXX
+v_n_basf = 14;
 u_knots = get_knot_vector(u_n_basf);
 v_knots = get_knot_vector(v_n_basf);
-
+% u_knots = [0.75 0.75 0.75 ((0.75+1)/2) 1 1 1]
+% v_knots = [0.125 0.125 0.125 0.25 0.25 0.25]
 %%% base test
 
-% basetestvec(v_knots);
+%basetestvec(v_knots);
 % return
 %%% patch boundary
 
@@ -25,20 +27,18 @@ P1 = [2.0; 0.0];
 P2 = [2.0; 2.0];
 P3 = [0.0; 2.0];
 
-%%% Reduce points to be approximatex (i.e., points which are in convex hull of the points P0,P1,P2,P3)
+%%% Reduce points to be approximated (i.e., points which are in convex hull of the points P0,P1,P2,P3)
 
 X = getpoints();
-[Xp X] = transform( X,P0,P1,P2,P3 );
-[np k] = size(Xp);
+[Xp] = transform( X,P0,P1,P2,P3 );
+[np, ~] = size(Xp);
 [ Xp ] = solve( Xp,P0,P1,P2,P3 );
 
 %%% Construction of the matrix
 
-
-%interv ??
 [B, Interv ] = build_LS_matrix( u_knots,v_knots, Xp);
 
-W = sparse(diag(Xp(:,4)));
+W = sparse(diag(Xp(:,4))); % scaling by weights of the points
 
 g = Xp(:,3);
 b = B'*W*g;
@@ -51,7 +51,7 @@ A = build_reg_matrix( u_knots,v_knots, P0,P1,P2,P3,nnzC);
 
 nC = norm(full(C));
 nA = norm(full(A));
-r = norm(full(C))/  norm(full(A));
+r = norm(full(C))/  norm(full(A)); 
 %r = 0.0;
 
 % [q r] = qr(B);
@@ -62,7 +62,7 @@ r = norm(full(C))/  norm(full(A));
 S = C+0.01*r*A;
 
 z = pcg(S,b,1e-12,500);
-
+%z = S\b;
 %%% Solution
 
 % Direct Solver
@@ -86,10 +86,12 @@ plotresultsvec(u_knots, v_knots,P0,P1,P2,P3,X,z,Err)
 %%%%%%%%%%%%%%%%%%
 
 
-us_n_basf = 10;
-vs_n_basf = 10;
+us_n_basf = 14;
+vs_n_basf = 14;
 us_knots = get_knot_vector(us_n_basf);
 vs_knots = get_knot_vector(vs_n_basf);
+% us_knots = [0.75 0.75 0.75 ((0.75+1)/2) 1 1 1];
+% vs_knots = [0.125 0.125 0.125 0.25 0.25 0.25];
 
 %%% patch boundary
 
@@ -107,7 +109,7 @@ P3s = [0.0; 2.0];
 %%% Reduce points to be approximatex (i.e., points which are in convex hull of the points P0,P1,P2,P3)
 
 Xs = getpoints2();
-[Xps Xs] = transform( Xs,P0s,P1s,P2s,P3s );
+[Xps] = transform( Xs,P0s,P1s,P2s,P3s );
 [nps ks] = size(Xps);
 [ Xps ] = solve( Xps,P0s,P1s,P2s,P3s );
 

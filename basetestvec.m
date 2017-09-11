@@ -1,4 +1,6 @@
 function [ ] = basetestvec( knots )
+% test of the properties of the spline base (produced by "splinebasevec") & plot the base
+
 n = 1000;
 n_basf = length(knots)-3;
 one = ones(n_basf,1);
@@ -12,6 +14,7 @@ x = linspace(min(knots),max(knots),n);
 x
 y
 %spy(y)
+figure
 plot(x,y)
 %figure
 if norm(y*one - ones(n,1))< n_basf*eps

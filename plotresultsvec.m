@@ -1,5 +1,5 @@
 function [ ] = plotresultsvec( u_knots, v_knots,P0,P1,P2,P3,X,z, Err)
-
+% plot computed results
 [np k] = size(X);
 
 u_n_basf = length(u_knots)-3;
@@ -45,7 +45,7 @@ end
 
 
 
-surf(Xsurf,Ysurf,Zsurf);
+surfl(Xsurf,Ysurf,Zsurf);
 
 
 %%plot original points
